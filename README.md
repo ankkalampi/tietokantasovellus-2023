@@ -24,3 +24,12 @@ Sovelluksen ominaisuuksia:
 - Käyttäjä voi tarkastella virtuaalihahmon keskustelupuuta visuaalisesti.
 - Käyttäjä voi "pelata", eli käydä keskusteluja virtuaalihahmojensa kanssa.
 - Käyttäjä voi ladata virtuaalihahmon tai keskusteluhuoneen keskustelupuun tekstimuotoisena. 
+
+
+Tilanne 5.2.2023:
+
+Sovelluksen ominaisuuksista käytössä tällä hetkellä vasta käyttäjän kirjautuminen. 
+Sovellukseen voi luoda uuden käyttäjän ja kirjautua sisään. Kirjautuminen vie profiilisivulle,
+jossa ei toistaiseksi ole muuta kuin tervehdysteksti.
+
+Sovellus on testattavissa osoitteessa npc-creator.fly.dev
