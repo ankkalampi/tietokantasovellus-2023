@@ -25,8 +25,6 @@ def login():
 
     session["username"] = username
 
-    ermsg ="väärä käyttäjänimi tai salasana"
-
 
     sql = text("SELECT id, password FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username})
@@ -42,7 +40,7 @@ def login():
         if check_password_hash(hash_value, password):
             #correct username
             session["failedlogin"] = False
-            return redirect("/user")
+            return redirect("/user/" + session["username"])
         else:
             #invalid password
             session["failedlogin"] = True
@@ -51,9 +49,10 @@ def login():
 
 
 @app.route("/user/<username>")
-def user():
+def user(username):
+
     
-    return render_template("user.html")
+    return render_template("user.html", username=username)
 
 @app.route("/back")
 def back():
