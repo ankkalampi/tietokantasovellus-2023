@@ -1,6 +1,12 @@
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO public;
+
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    name TEXT,
+    username TEXT,
     password TEXT,
     role INTEGER
 );
@@ -22,7 +28,7 @@ CREATE TABLE dialogues (
     id SERIAL PRIMARY KEY,
     name TEXT,
     npc_id INTEGER REFERENCES npcs,
-    parent_dialogue_id INTEGER REFERENCES dialogues,
+    parent_dialogue_id INTEGER REFERENCES dialogues
 );
 
 /*  node_types:
@@ -39,14 +45,14 @@ CREATE TABLE nodes (
     id SERIAL PRIMARY KEY,
     node_type INTEGER,
     content_type INTEGER,
-    dialogue_id INTEGER REFERENCES dialogues,
+    dialogue_id INTEGER REFERENCES dialogues
 );
 
 CREATE TABLE connections (
     id SERIAL PRIMARY KEY,
     start_node_id INTEGER REFERENCES nodes,
     end_node_id INTEGER REFERENCES nodes
-)
+);
 
 CREATE TABLE utterances (
     id SERIAL PRIMARY KEY,
