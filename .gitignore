@@ -2,3 +2,5 @@ venv
 tsoha2023.code-workspace
 .env
 __pycache__/app.cpython-38.pyc
+__pycache__/db.cpython-38.pyc
+__pycache__/routes.cpython-38.pyc
