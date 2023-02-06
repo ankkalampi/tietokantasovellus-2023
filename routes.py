@@ -48,6 +48,11 @@ def user(username):
     if session["username"] == username:
         return render_template("profile.html", username=username)
 
+@app.route("/add_npc")
+def add_npc():
+
+    return
+
 
 @app.route("/back")
 def back():
@@ -68,7 +73,7 @@ def profile():
 def register():
     return render_template("register.html")
 
-@app.route("/createuser", methods=[ "POST"])
+@app.route("/create_user", methods=[ "POST"])
 def createuser():
     username = request.form["username"]
     password = request.form["password"]
