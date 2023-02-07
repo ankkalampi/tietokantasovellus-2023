@@ -12,8 +12,6 @@ from login import set_message
 
 @app.route("/", methods=["GET"])
 def index():
-    if request.method == "GET":
-        set_message()
     return render_template("index.html")
 
 @app.route("/login", methods=["POST"])
@@ -29,19 +27,19 @@ def login():
 
     if not user:
         #invalid username
-        session["failedlogin"] = True
-        return redirect("/")
+       
+        return render_template("index.html", message = "Väärä käyttäjänimi tai salasana")
         
     else:
         hash_value = user.password
         if check_password_hash(hash_value, password):
             #correct username
-            session["failedlogin"] = False
+            
             return redirect("/user/" + session["username"])
         else:
             #invalid password
-            session["failedlogin"] = True
-            return redirect("/")
+          
+            return render_template("index.html", message = "Väärä käyttäjänimi tai salasana")
 
 
 
@@ -59,8 +57,7 @@ def add_npc():
 
 @app.route("/back")
 def back():
-    session["failedlogin"] = False
-    set_message()
+   
     return redirect("/")
 
 
@@ -75,7 +72,7 @@ def profile():
 
 @app.route("/register")
 def register():
-    set_message()
+    #set_message()
     return render_template("register.html")
 
 @app.route("/create_user", methods=[ "POST"])
@@ -84,8 +81,8 @@ def createuser():
     password = request.form["password"]
 
     if create_user(username, password):
-        session["usercreated"] = True
-        return redirect("/")
+        
+        return render_template("index.html", message = "käyttäjä luotu")
     else:
-        session["failedlogin"] = False
-        return redirect("/register")
+       
+        return render_template("register.html",message = "käyttäjänimi varattu")
