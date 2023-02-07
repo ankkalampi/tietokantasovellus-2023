@@ -7,10 +7,13 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.sql import text
 from app import app
 from db import db, get_user, create_user
+from login import set_message
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
+    if request.method == "GET":
+        set_message()
     return render_template("index.html")
 
 @app.route("/login", methods=["POST"])
@@ -57,6 +60,7 @@ def add_npc():
 @app.route("/back")
 def back():
     session["failedlogin"] = False
+    set_message()
     return redirect("/")
 
 
@@ -71,6 +75,7 @@ def profile():
 
 @app.route("/register")
 def register():
+    set_message()
     return render_template("register.html")
 
 @app.route("/create_user", methods=[ "POST"])
@@ -78,9 +83,9 @@ def createuser():
     username = request.form["username"]
     password = request.form["password"]
 
-    create_user(username, password)
-    
-
-    session["failedlogin"] = False
-
-    return redirect("/")
+    if create_user(username, password):
+        session["usercreated"] = True
+        return redirect("/")
+    else:
+        session["failedlogin"] = False
+        return redirect("/register")

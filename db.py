@@ -16,10 +16,24 @@ def get_user(username):
     return user
 
 def create_user(username, password):
-    hash_value = generate_password_hash(password)
-    sql = text("INSERT INTO users(username, password) VALUES (:username, :password)")
-    db.session.execute(sql, {"username":username, "password":hash_value})
-    db.session.commit()
+    if user_exists(username):
+        return False
+    else:
+        hash_value = generate_password_hash(password)
+        sql = text("INSERT INTO users(username, password) VALUES (:username, :password)")
+        db.session.execute(sql, {"username":username, "password":hash_value})
+        db.session.commit()
+        return True
+
+def user_exists(username):
+    sql = text("SELECT * FROM users WHERE username=:username")
+    result = db.session.execute(sql, {"username":username})
+    number_of_rows = len(result.mappings().all())
+    if number_of_rows > 0:
+        return True
+    else:
+        return False
+    
 
 def create_npc(name, username):
     user = get_user(username)
