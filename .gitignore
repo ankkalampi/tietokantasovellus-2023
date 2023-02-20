@@ -6,3 +6,4 @@ __pycache__/db.cpython-38.pyc
 __pycache__/routes.cpython-38.pyc
 start.sh
 __pycache__/login.cpython-38.pyc
+__pycache__/*

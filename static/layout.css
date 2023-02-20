@@ -1,0 +1,28 @@
+
+body {
+    margin: auto;
+    max-width: 70em;
+    font-family:Arial, Helvetica, sans-serif;
+    background: lightgray;
+}
+
+.header {
+    background: lightskyblue;
+    font-weight: bolder;
+    padding: 1em 1em;
+    font-size: 3em;
+}
+
+
+.titlebar {
+    background: blueviolet;
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+
+.content {
+    background: grey;
+    padding: 0%;
+}
+
